@@ -1,10 +1,6 @@
-import { Application } from "https://deno.land/x/oak/mod.ts";
-import router from "./routes.ts";
-const port = 8000;
+import { Fastro } from "https://deno.land/x/fastro/mod.ts";
+import * as productsController from "./routes.ts";
+const server = new Fastro();
 
-const app = new Application();
-app.use(router.routes());
-app.use(router.allowedMethods());
-console.log("server Running on Port ${port}");
-
-await app.listen({ port });
+server.register(productsController.productsRouters);
+await server.listen({ port: 8000 });
