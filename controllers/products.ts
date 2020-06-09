@@ -5,7 +5,13 @@ import client from "../database/database.ts";
 
 export const getProducts = async (req: Request) => {
   const result = await client.query("select * from Products");
-  req.send(result);
+  console.log(result);
+  req.send({
+    status: 200,
+    msg: "Deno Backend Engine",
+    info: "Learning for Used by Flutter App",
+    data: result,
+  });
 };
 export const getProduct = async (req: Request) => {
   const id = req.parameter.id;
@@ -14,7 +20,12 @@ export const getProduct = async (req: Request) => {
     "select * from Products where id = ? ",
     [id],
   );
-  req.send(result);
+  req.send({
+    status: 200,
+    msg: "Deno Backend Engine",
+    info: "Learning for Used by Flutter App",
+    data: result,
+  });
 };
 
 export const addProduct = async (req: Request) => {
@@ -32,9 +43,12 @@ export const addProduct = async (req: Request) => {
       data.stock,
     ],
   );
-  console.log(result);
-
-  req.send("OK, Data Inserted !!!");
+  req.send({
+    status: 200,
+    msg: "Deno Backend Engine",
+    info: "Learning for Used by Flutter App",
+    data: result,
+  });
 };
 
 export const updateProduct = async (req: Request) => {
@@ -56,7 +70,12 @@ export const updateProduct = async (req: Request) => {
     ],
   );
   console.log(result);
-  req.send(result);
+  req.send({
+    status: 200,
+    msg: "Deno Backend Engine",
+    info: "Learning for Used by Flutter App",
+    data: result,
+  });
 };
 
 export const deleteProduct = async (req: Request) => {
@@ -67,5 +86,10 @@ export const deleteProduct = async (req: Request) => {
     ["id", id],
   );
 
-  req.send(result);
+  req.send({
+    status: 200,
+    msg: "Deno Backend Engine",
+    info: "Learning for Used by Flutter App",
+    data: result,
+  });
 };
