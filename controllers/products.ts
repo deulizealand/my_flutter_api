@@ -2,30 +2,87 @@ import { v4 } from "https://deno.land/std/uuid/mod.ts";
 
 import { Request } from "https://deno.land/x/fastro/mod.ts";
 import client from "../database/database.ts";
+import cekApi from "../handlers/cekApi.ts";
 
 export const getProducts = async (req: Request) => {
-  const result = await client.query("select * from Products");
-  console.log(result);
-  req.send({
-    status: 200,
-    msg: "Deno Backend Engine",
-    info: "Learning for Used by Flutter App",
-    data: result,
-  });
+  const status = 200;
+  const headers = new Headers();
+  headers.set("X-Made-In", "Wangsean Village, Bali");
+  headers.set("X-Author", "Hendrjl");
+  headers.set("X-Telegram", "https://t.me/hendrjl_bot");
+  const api_key = req.parameter.apiKey;
+  const final = await cekApi(api_key);
+
+  if (final != null) {
+    const result = await client.query("select * from Products");
+    req.send(
+      {
+        status: status,
+        api: [{
+          key: final.api_key,
+          register: final.created_at,
+        }],
+        flag: "Deno Backend Engine",
+        info: "Learning for Used by Flutter App",
+        msg: "Query Executed !!!",
+        data: result,
+      },
+      status,
+      headers,
+    );
+  } else {
+    req.send(
+      {
+        status: 404,
+        msg: "no valid Api Key",
+        info: "Learning for Used by Flutter App",
+      },
+      status,
+      headers,
+    );
+  }
 };
 export const getProduct = async (req: Request) => {
   const id = req.parameter.id;
+  const api_key = req.parameter.apiKey;
   console.log(id);
   const result = await client.query(
     "select * from Products where id = ? ",
     [id],
   );
-  req.send({
-    status: 200,
-    msg: "Deno Backend Engine",
-    info: "Learning for Used by Flutter App",
-    data: result,
-  });
+  const status = 200;
+  const headers = new Headers();
+  headers.set("X-Made-In", "Wangsean Village, Bali");
+  headers.set("X-Author", "Hendrjl");
+  headers.set("X-Telegram", "https://t.me/hendrjl_bot");
+  const final = await cekApi(api_key);
+  if (final != null) {
+    req.send(
+      {
+        status: status,
+        api: [{
+          key: final.api_key,
+          register: final.created_at,
+        }],
+        flag: "Deno Backend Engine",
+        info: "Learning for Used by Flutter App",
+        msg: "Query Executed !!!",
+        data: result,
+      },
+      status,
+      headers,
+    );
+  } else {
+    req.send(
+      {
+        status: 404,
+        msg: "no valid Api Key",
+        info: "Learning for Used by Flutter App",
+      },
+      status,
+      headers,
+    );
+  }
 };
 
 export const addProduct = async (req: Request) => {
@@ -43,12 +100,41 @@ export const addProduct = async (req: Request) => {
       data.stock,
     ],
   );
-  req.send({
-    status: 200,
-    msg: "Deno Backend Engine",
-    info: "Learning for Used by Flutter App",
-    data: result,
-  });
+  const status = 200;
+  const headers = new Headers();
+  headers.set("X-Made-In", "Wangsean Village, Bali");
+  headers.set("X-Author", "Hendrjl");
+  headers.set("X-Telegram", "https://t.me/hendrjl_bot");
+  const api_key = req.parameter.apiKey;
+  const final = await cekApi(api_key);
+
+  if (final != null) {
+    req.send(
+      {
+        status: status,
+        api: [{
+          key: final.api_key,
+          register: final.created_at,
+        }],
+        flag: "Deno Backend Engine",
+        info: "Learning for Used by Flutter App",
+        msg: "Product Inserted !!!",
+        data: result,
+      },
+      status,
+      headers,
+    );
+  } else {
+    req.send(
+      {
+        status: 404,
+        msg: "no valid Api Key",
+        info: "Learning for Used by Flutter App",
+      },
+      status,
+      headers,
+    );
+  }
 };
 
 export const updateProduct = async (req: Request) => {
@@ -70,12 +156,41 @@ export const updateProduct = async (req: Request) => {
     ],
   );
   console.log(result);
-  req.send({
-    status: 200,
-    msg: "Deno Backend Engine",
-    info: "Learning for Used by Flutter App",
-    data: result,
-  });
+  const status = 200;
+  const headers = new Headers();
+  headers.set("X-Made-In", "Wangsean Village, Bali");
+  headers.set("X-Author", "Hendrjl");
+  headers.set("X-Telegram", "https://t.me/hendrjl_bot");
+  const api_key = req.parameter.apiKey;
+  const final = await cekApi(api_key);
+
+  if (final != null) {
+    req.send(
+      {
+        status: status,
+        api: [{
+          key: final.api_key,
+          register: final.created_at,
+        }],
+        flag: "Deno Backend Engine",
+        info: "Learning for Used by Flutter App",
+        msg: "Product Updated",
+        data: result,
+      },
+      status,
+      headers,
+    );
+  } else {
+    req.send(
+      {
+        status: 404,
+        msg: "no valid Api Key",
+        info: "Learning for Used by Flutter App",
+      },
+      status,
+      headers,
+    );
+  }
 };
 
 export const deleteProduct = async (req: Request) => {
@@ -86,10 +201,39 @@ export const deleteProduct = async (req: Request) => {
     ["id", id],
   );
 
-  req.send({
-    status: 200,
-    msg: "Deno Backend Engine",
-    info: "Learning for Used by Flutter App",
-    data: result,
-  });
+  const status = 200;
+  const headers = new Headers();
+  headers.set("X-Made-In", "Wangsean Village, Bali");
+  headers.set("X-Author", "Hendrjl");
+  headers.set("X-Telegram", "https://t.me/hendrjl_bot");
+  const api_key = req.parameter.apiKey;
+  const final = await cekApi(api_key);
+
+  if (final != null) {
+    req.send(
+      {
+        status: status,
+        api: [{
+          key: final.api_key,
+          register: final.created_at,
+        }],
+        flag: "Deno Backend Engine",
+        info: "Learning for Used by Flutter App",
+        msg: "Product Deleted",
+        data: result,
+      },
+      status,
+      headers,
+    );
+  } else {
+    req.send(
+      {
+        status: 404,
+        msg: "no valid Api Key",
+        info: "Learning for Used by Flutter App",
+      },
+      status,
+      headers,
+    );
+  }
 };

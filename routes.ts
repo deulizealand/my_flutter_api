@@ -6,15 +6,21 @@ import {
   updateProduct,
   deleteProduct,
 } from "./controllers/products.ts";
+import {
+  notFound,
+} from "./middlewares/notFound.ts";
+import { Request } from "https://deno.land/x/fastro/mod.ts";
+
+const middleware = (req: Request, done: Function) => {
+  req.oke = () => req.send("oke");
+  done();
+};
 
 export const productsRouters = function (fastro: Fastro) {
-  fastro.get("/api/v1/products", getProducts)
-    .get("/api/v1/products/:id", getProduct)
-    .post("/api/v1/products", addProduct)
-    .put("/api/v1/products/:id", updateProduct)
-    .delete("/api/v1/products/:id", deleteProduct)
-    .post("/hello", (req) => {
-      // const { payload } = JSON.parse(req.payload);
-      // req.send(payload);
-    });
+  fastro.use(middleware)
+    .get("/api/v1/products/:apiKey", getProducts)
+    .get("/api/v1/products/:id/:apiKey", getProduct)
+    .post("/api/v1/products/:apiKey", addProduct)
+    .put("/api/v1/products/:id/:apiKey", updateProduct)
+    .delete("/api/v1/products/:id/:apiKey", deleteProduct);
 };
